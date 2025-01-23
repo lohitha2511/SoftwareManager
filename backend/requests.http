@@ -1,0 +1,19 @@
+### Registration
+
+POST http://localhost:4600/user/register
+Content-Type: application/json
+
+{
+    "name":"test",
+    "password":"abc",
+    "role":"Developer"
+}
+
+### login
+POST http://localhost:4600/user/login
+Content-Type: application/json
+
+{
+    "name":"test",
+    "password":"abc"
+}
