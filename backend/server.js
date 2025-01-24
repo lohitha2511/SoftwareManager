@@ -1,5 +1,6 @@
 const exp = require("express");
 const userApp = require("./APIs/userApp");
+const leaderApp = require("./APIs/leaderApp");
 require("dotenv").config();
 const app = exp();
 app.use(exp.json());
@@ -22,6 +23,7 @@ client
   });
 
 app.use("/user", userApp);
+app.use("/leader", leaderApp);
 
 app.listen(port, () => {
   console.log("running");
