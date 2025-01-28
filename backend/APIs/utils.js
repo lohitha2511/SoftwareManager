@@ -21,4 +21,4 @@ const getProjects = expHandler(async (req, res) => {
   }
 });
 
-modules.exports=(getProjects)
+module.exports={getProjects}
