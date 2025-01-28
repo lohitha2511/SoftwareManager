@@ -1,9 +1,14 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import LandingPage from './pages/LandingPage';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import LandingPage from "./pages/LandingPage";
+import { AuthProvider, useAuth } from "./context/AuthContext";
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useAuth();
@@ -15,7 +20,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/landing" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
@@ -26,7 +31,6 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="/" element={<Navigate to="/landing" />} />
         </Routes>
       </Router>
     </AuthProvider>

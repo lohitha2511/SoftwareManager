@@ -1,6 +1,4 @@
-const expHandler=require("express-async-handler")
-
-
+const expHandler = require("express-async-handler");
 
 const getProjects = expHandler(async (req, res) => {
   const username = req.headers.curr_user_name;
@@ -21,4 +19,4 @@ const getProjects = expHandler(async (req, res) => {
   }
 });
 
-module.exports={getProjects}
+module.exports = { getProjects };

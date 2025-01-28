@@ -1,12 +1,17 @@
 const exp = require("express");
 const userApp = require("./APIs/userApp");
 const leaderApp = require("./APIs/leaderApp");
-const devApp = require("./APIs/developer");
-const testApp = require("./APIs/tester");
+const devApp = require("./APIs/developerApp");
+const testApp = require("./APIs/testerApp");
 require("dotenv").config();
+const cors = require("cors");
 const app = exp();
+
 app.use(exp.json());
+app.use(cors());
+
 const port = process.env.PORT;
+
 const client = require("mongodb").MongoClient;
 client
   .connect(process.env.DBURL)
@@ -18,7 +23,7 @@ client
     app.set("usersCollection", usersCollection);
     app.set("issueCollection", issueCollection);
     app.set("projectsCollection", projectsCollection);
-    console.log("database connected");
+    console.log("Database Connected Successfully!");
   })
   .catch((err) => {
     console.log(err);
@@ -26,10 +31,9 @@ client
 
 app.use("/user", userApp);
 app.use("/leader", leaderApp);
-app.use("/developer",devApp)
-app.use("/tester",testApp)
-
+app.use("/developer", devApp);
+app.use("/tester", testApp);
 
 app.listen(port, () => {
-  console.log("running");
+  console.log(`Running on port: ${port}.`);
 });

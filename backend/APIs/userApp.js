@@ -19,6 +19,7 @@ const registerUser = expHandler(async (req, res) => {
     password: hashed,
     role: user.role,
     issuesSolved: [],
+    projects: [],
   };
 
   await usersCollection.insertOne(newUser);
