@@ -1,14 +1,30 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import axios from "axios";
 function Login() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async  (e) => {
     e.preventDefault();
-    navigate("/");
+
+    const res = await axios.post("http://localhost:4500/user/login", {
+      
+      password,
+      name,
+    })
+    if(res.data.status===400){
+      alert(res.data.message)
+    }
+    else if(res.data.status===200){
+      window.localStorage.setItem("token",res.data.token)
+      window.localStorage.setItem("name",res.data.dbUsername)
+
+      alert("Succesfull")
+      navigate('/')
+
+    }
   };
 
   return (
