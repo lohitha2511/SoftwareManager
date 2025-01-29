@@ -32,7 +32,7 @@ const loginUser = expHandler(async (req, res) => {
   let username = user.name;
   let dbuser = await usersCollection.findOne({ name: username });
   if (!dbuser) {
-    return res.send({ status: 400, message: "User doesn't  exist!" });
+    return res.send({ status: 400, message: "User doesn't exist!" });
   }
   const isverified = await bcrypt.compare(user.password, dbuser.password);
   if (!isverified) {
@@ -42,7 +42,12 @@ const loginUser = expHandler(async (req, res) => {
   const userID = dbuser._id;
   const dbUsername = dbuser.name;
   const token = jwt.sign({ id: userID, name: dbUsername }, process.env.TOKEN);
-  return res.send({status :200 , token, dbUsername, message: "Login Successful!" });
+  return res.send({
+    status: 200,
+    token,
+    dbUsername,
+    message: "Login Successful!",
+  });
 });
 
 userApp.post("/register", registerUser);

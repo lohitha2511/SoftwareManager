@@ -6,24 +6,21 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit =async  (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const res = await axios.post("http://localhost:4500/user/login", {
-      
       password,
       name,
-    })
-    if(res.data.status===400){
-      alert(res.data.message)
-    }
-    else if(res.data.status===200){
-      window.localStorage.setItem("token",res.data.token)
-      window.localStorage.setItem("name",res.data.dbUsername)
+    });
+    if (res.data.status === 400) {
+      alert(res.data.message);
+    } else if (res.data.status === 200) {
+      window.localStorage.setItem("token", res.data.token);
+      window.localStorage.setItem("name", res.data.dbUsername);
 
-      alert("Succesfull")
-      navigate('/')
-
+      alert("Succesfully Logged In");
+      navigate("/");
     }
   };
 
