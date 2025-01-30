@@ -9,6 +9,8 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import LandingPage from "./pages/LandingPage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import Developer from "./pages/Developer";
+import TesterDashboard from "./pages/TesterDashboard";
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useAuth();
@@ -17,20 +19,15 @@ function PrivateRoute({ children }) {
 
 function App() {
   return (
+    
     <AuthProvider>
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/dashboard" element={<Developer />} />
+          <Route path="/Tester" element={<TesterDashboard />} />
         </Routes>
       </Router>
     </AuthProvider>

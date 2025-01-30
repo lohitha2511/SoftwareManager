@@ -3,6 +3,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const expHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
+const { verifyToken } = require("../Middleware/auth");
 const userApp = exp.Router();
 
 const registerUser = expHandler(async (req, res) => {
@@ -50,7 +51,19 @@ const loginUser = expHandler(async (req, res) => {
   });
 });
 
+const getRole = expHandler(async (req, res) => {
+  const userName = req.headers.curr_user_name;
+  const usersCollection = req.app.get("usersCollection");
+
+  const user = await usersCollection.findOne({ name: userName });
+  if (!user) {
+    return res.send({ status: 404, message: "User not found" });
+  } else {
+    return res.send({ status: 200, payload: user.role });
+  }
+});
 userApp.post("/register", registerUser);
 userApp.post("/login", loginUser);
+userApp.get("/role", verifyToken, getRole);
 
 module.exports = userApp;
